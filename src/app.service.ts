@@ -8,6 +8,6 @@ export class AppService {
   getHello(): string {
     return `Hello AWS => config service enabled... => ${this.configService.get(
       'ENV_TEST_VERIFICATION_MESSAGE',
-    )}`;
+    )} Listening on port => ${this.configService.get('PORT')}`;
   }
 }
