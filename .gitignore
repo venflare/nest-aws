@@ -2,8 +2,12 @@
 /dist
 /node_modules
 
+# Local Environment
+.env*.local
+
 # Logs
 logs
+.log*.local
 *.log
 npm-debug.log*
 pnpm-debug.log*
