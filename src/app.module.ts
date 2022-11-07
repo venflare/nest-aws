@@ -9,8 +9,8 @@ import { AppService } from './app.service';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      // envFilePath: '.env.production',
-      envFilePath: '.env.local',
+      envFilePath: '.env.production',
+      // envFilePath: '.env.local',
       isGlobal: true,
       validationSchema: Joi.object({
         NODE_ENV: Joi.string()
