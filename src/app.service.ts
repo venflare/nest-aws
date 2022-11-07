@@ -6,7 +6,7 @@ export class AppService {
   constructor(private readonly configService: ConfigService) {}
 
   getHello(): string {
-    return `Hello AWS => config service enabled... => ${this.configService.get(
+    return `Hello AWS All files here => config service enabled... => ${this.configService.get(
       'ENV_TEST_VERIFICATION_MESSAGE',
     )} Listening on port => ${this.configService.get(
       'PORT',
