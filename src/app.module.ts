@@ -1,10 +1,21 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { APP_FILTER } from '@nestjs/core';
 import * as Joi from 'joi';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { User } from './users/entities';
+import { UserSubscriber } from './users/subscribers';
+import { UsersModule } from './users/users.module';
+import { ExceptionFilter } from './core/exception.filter';
+import { LoggerModule } from './core/logger/logger.module';
+import { AuthenticationModule } from './core/authentication/authentication.module';
+import { SeederModule } from './core/util/seeder/seeder.module';
+import { Policy } from './policies/entities';
+import { PoliciesModule } from './policies/policies.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
@@ -39,8 +50,14 @@ import { AppService } from './app.service';
       }),
       inject: [ConfigService],
     }),
+    ScheduleModule.forRoot(),
+    LoggerModule,
+    AuthenticationModule,
+    SeederModule,
+    UsersModule,
+    PoliciesModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, { provide: APP_FILTER, useClass: ExceptionFilter }],
 })
 export class AppModule {}
